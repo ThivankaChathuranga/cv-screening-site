@@ -1,0 +1,17 @@
+Data Analyst - Electronics Manufacturing
+
+We are looking for a Data Analyst to turn production, quality and HR data into insights.
+
+Responsibilities
+- Build and maintain dashboards in Power BI for production yield, scrap and on-time delivery
+- Write SQL queries to extract and clean data from the ERP and MES databases
+- Use Python (pandas) for analysis, forecasting and automation of monthly reports
+- Apply statistics and regression to find drivers of defects and downtime
+- Present findings to managers with clear communication
+
+Requirements
+- Degree in Data Science, Statistics, Computer Science or related field
+- 2+ years of experience in data analysis
+- Strong SQL, Python and Excel; Power BI or Tableau
+- Knowledge of machine learning is an advantage
+- Experience with Git is a plus

@@ -1,0 +1,18 @@
+Nadeesha Perera
+nadeesha.perera@example.com | +94 77 123 4567 | linkedin.com/in/nadeesha-example
+Gender: Female
+
+PROFILE
+Data analyst with 3 years of experience in manufacturing analytics. She builds Power BI dashboards and automates reporting with Python.
+
+EXPERIENCE
+Data Analyst, ABC Electronics (2023 - present)
+- Built Power BI dashboards for production yield, scrap and OTD used by plant management
+- Wrote SQL queries on SQL Server ERP data; automated monthly reports with Python and pandas
+- Used regression and hypothesis testing to identify drivers of solder defects
+
+SKILLS
+Python, pandas, SQL, Power BI, Excel (pivot tables), statistics, Git, scikit-learn
+
+EDUCATION
+BSc (Hons) Data Science

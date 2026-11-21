@@ -1,0 +1,14 @@
+Piumi Abeysekara
+piumi.a@example.com | 072 121 2121
+
+PROFILE
+People analytics specialist with 3 years of experience, combining HR and data.
+
+EXPERIENCE
+People Analytics Analyst, Manufacturing Group
+- Built Power BI dashboards on headcount, attrition and absenteeism
+- SQL and Python to analyse HRIS data and predict employee attrition with machine learning
+- Supported recruitment reporting and engagement survey analysis
+
+SKILLS
+Python, SQL, Power BI, Excel, statistics, HRIS, machine learning

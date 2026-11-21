@@ -1,0 +1,16 @@
+Gihan Liyanage
+gihan.l@example.com | 070 909 1234
+
+SUMMARY
+Manufacturing engineer, 4 years, surface-mount electronics assembly.
+
+EXPERIENCE
+Manufacturing Engineer, Automotive Electronics Plant (2022 - present)
+- Engineering owner for two surface-mount lines: placement programs, oven thermal profiles, stencil changes
+- Six Sigma Green Belt project raised first pass yield on PCBA from 94% to 98%
+- Ran FMEA and 8D investigations for customer returns
+- Kept work instructions aligned with ISO 9001 and IPC-A-610; ESD audits on the shop floor
+- Line layouts in AutoCAD
+
+EDUCATION
+BEng (Hons) Mechatronics Engineering

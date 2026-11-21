@@ -1,0 +1,13 @@
+Nuwan Karunaratne
+nuwan.k@example.com
+
+SUMMARY
+Mechanical design engineer, 3 years.
+
+EXPERIENCE
+Design Engineer, Machinery Fabricator
+- 3D modelling in SolidWorks and AutoCAD drawings for sheet metal parts
+- Supported prototype builds
+
+SKILLS
+SolidWorks, AutoCAD, GD&T, CNC basics

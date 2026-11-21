@@ -1,0 +1,15 @@
+Ishara Jayasinghe
+ishara.j@example.com
+
+ABOUT
+Recent graduate passionate about machine learning and NLP research.
+
+PROJECTS
+- Sentiment analysis of product reviews using transformers and PyTorch
+- Image classification with deep learning (Keras)
+
+SKILLS
+Python, PyTorch, TensorFlow, NLP, deep learning, Git
+
+EDUCATION
+BSc Computer Science (2026)

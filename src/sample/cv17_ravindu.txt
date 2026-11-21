@@ -1,0 +1,15 @@
+Ravindu Peiris
+ravindu.p@example.com | 077 777 0042
+
+SUMMARY
+Data engineer with 4 years of experience building data pipelines.
+
+EXPERIENCE
+Data Engineer, Fintech Company (2022 - present)
+- Built ETL pipelines in Python and Airflow loading data into a PostgreSQL warehouse
+- Wrote complex SQL for reporting tables used by analysts
+- Created a few Power BI dashboards for operations KPIs
+- Deployed jobs on AWS; version control with Git
+
+EDUCATION
+BSc Computer Science

@@ -1,0 +1,14 @@
+Process Engineer - SMT / PCB Assembly
+
+Responsibilities
+- Own SMT line processes: pick and place programming, reflow profiling, stencil design
+- Improve yield and cycle time on PCB assembly lines using lean and six sigma tools
+- Lead root cause analysis (8D, fishbone, FMEA) for customer and internal defects
+- Maintain process documentation in line with ISO 9001 and IPC-A-610
+- Ensure ESD control on the production floor
+
+Requirements
+- BSc in Electrical, Electronic or Mechatronics Engineering
+- 3+ years of process engineering experience in electronics manufacturing
+- Knowledge of AutoCAD or SolidWorks
+- Leadership and problem solving skills

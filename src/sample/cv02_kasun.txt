@@ -1,0 +1,14 @@
+Kasun Fernando
+kasun.f@example.com | 071 555 0101
+
+SUMMARY
+Business intelligence developer, 4 years. Experienced in Tableau, MySQL and ETL pipelines.
+
+EXPERIENCE
+BI Developer, Retail Group (2021 - present)
+- Designed Tableau dashboards for sales and inventory
+- Built ETL data pipelines in Airflow feeding a PostgreSQL warehouse
+- Stakeholder communication with regional managers
+
+SKILLS
+SQL, PostgreSQL, Tableau, Excel, ETL, Airflow, basic Python

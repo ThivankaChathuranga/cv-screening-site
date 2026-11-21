@@ -1,0 +1,19 @@
+Amila Gunawardena
+amila.g@example.com | +94 71 444 5566
+
+PROFILE
+Process engineer with 5 years of experience in electronics manufacturing (EMS).
+
+EXPERIENCE
+Process Engineer, EMS Company (2021 - present)
+- Responsible for SMT lines: pick and place programming, reflow oven profiling, stencil design
+- Improved first pass yield by 6% on PCBA lines through kaizen and six sigma projects
+- Led 8D and FMEA for customer complaints; root cause analysis with fishbone diagrams
+- Maintained work instructions per ISO 9001 and IPC-A-610; audited ESD control
+- Supervised a team of 8 technicians
+
+SKILLS
+SMT, PCB assembly, lean, six sigma, FMEA, IPC-A-610, ESD, AutoCAD
+
+EDUCATION
+BSc Electronic Engineering
