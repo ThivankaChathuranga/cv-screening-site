@@ -1,5 +1,9 @@
 # CV Screening with NLP: 3D showcase website
 
+https://rad-lokum-80907a.netlify.app
+
+https://github.com/user-attachments/assets/5c5ecdae-2880-451a-9eb3-c0ceda9049e6
+
 An interactive WebGL showcase for the [CV Screening with NLP](https://github.com/YOUR-USERNAME/cv-screening-nlp) project. Scrolling tells the story of how the engine works, entirely in real-time 3D:
 
 | Section | 3D scene |
