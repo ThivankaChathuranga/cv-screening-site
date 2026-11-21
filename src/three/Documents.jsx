@@ -117,7 +117,7 @@ function DocCard({ c, i, texture, refs, hovered, setHovered }) {
     >
       <group ref={(el) => (refs.current[i].inner = el)}>
         <RoundedBox args={[W, H, 0.03]} radius={0.025} smoothness={4} castShadow receiveShadow>
-          <meshPhysicalMaterial color={COLORS.paper} roughness={0.62} sheen={0.4} sheenRoughness={0.6} clearcoat={0.15} />
+          <meshPhysicalMaterial color={COLORS.paper} roughness={0.62} sheen={0.4} sheenRoughness={0.6} clearcoat={0.15} clearcoatRoughness={0.35} />
         </RoundedBox>
         <mesh position={[0, 0, 0.0162]}>
           <planeGeometry args={[W - 0.02, H - 0.02]} />

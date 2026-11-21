@@ -5,7 +5,15 @@ import { SOFT_SKILLS, extractSkills } from './skills.js'
 const NICE = /prefer|advantage|\ba plus\b|\bis a plus\b|\bplus\b|desirable|nice to have|bonus|ideally|would be an asset|good to have|beneficial/i
 const NICE_SECTION = /nice to have|preferred|desirable|good to have|bonus/i
 const REQ_SECTION = /responsibilit|requirement|qualification|duties|what you.?ll do|what we.?re looking|skills|experience|key tasks|the role|you will|must have|essential|competenc/i
-const BULLET = /^\s*(?:[-•*·▪●◦–]|\d+[.)])\s+/
+const BULLET = /^\s*(?:[-•*·▪●◦–\uf0b7\uf0a7]|\d+[.)])\s+/
+const NOISE = /sample document|testing only|^page \d+$|^(strictly )?confidential$/i
+const TITLE_PREFIX = /^(job description|job title|position|role|vacancy)\s*[:\-–—]\s*/i
+
+/** Any short heading line, e.g. "Position Summary", "Application Criteria". */
+function isAnyHeader(line) {
+  const t = line.trim().replace(/:$/, '')
+  return !BULLET.test(line) && t.split(/\s+/).length <= 4 && /^[A-Z]/.test(t) && !/[.,;|]/.test(t) && !/\d/.test(t)
+}
 
 function isHeader(line) {
   const stripped = line.trim().replace(/:$/, '')
@@ -17,8 +25,15 @@ function isHeader(line) {
 }
 
 export function parseJD(text, title = '', tax) {
-  const lines = text.split(/\r?\n/).filter((l) => l.trim())
-  if (!title && lines.length && lines[0].split(/\s+/).length <= 10 && !BULLET.test(lines[0])) title = lines[0].trim()
+  const lines = text
+    .replace(/\s+[•▪●◦\uf0b7\uf0a7]\s+/g, '\n• ')
+    .split(/\r?\n/)
+    .map((l) => l.replace(/\s*Page \d+\s*$/i, ''))
+    .filter((l) => l.trim() && !NOISE.test(l.trim()))
+  if (!title) {
+    const t = lines.find((l) => TITLE_PREFIX.test(l.trim())) || lines[0]
+    if (t && t.split(/\s+/).length <= 10 && !BULLET.test(t)) title = t.trim().replace(TITLE_PREFIX, '')
+  }
 
   const structured = lines.some((l) => BULLET.test(l)) || lines.some(isHeader)
   let candidates = []
@@ -31,7 +46,13 @@ export function parseJD(text, title = '', tax) {
         inReq = true
         continue
       }
-      if (BULLET.test(l) || inReq) candidates.push([l.replace(BULLET, '').trim(), nice])
+      if (isAnyHeader(l)) {
+        // a section that is not about requirements (summary, how to apply...)
+        inReq = false
+        nice = false
+        continue
+      }
+      if (inReq || (BULLET.test(l) && !lines.some(isHeader))) candidates.push([l.replace(BULLET, '').trim(), nice])
     }
   } else {
     candidates = lines.join(' ').split(/(?<=[.!?;])\s+/).map((s) => [s.trim(), false])

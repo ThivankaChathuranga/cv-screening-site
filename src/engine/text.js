@@ -11,9 +11,25 @@ const NIC = /\b(\d{9}[vVxX]|\d{12})\b/g // Sri Lankan NIC formats
 const PERSONAL = /^(gender|sex|marital status|religion|nationality|civil status)\s*[:-].*$/gim
 const GENDER = /\b(he|she|him|her|his|hers|mr|mrs|ms|miss|male|female|husband|wife)\b\.?/gi
 
+const NAME_PREFIX = /^(curriculum vitae|resume|résumé|cv|name)\s*[:\-–—]?\s*/i
+const NOT_A_NAME = /sample|document|testing|page|vitae|resume|applying|contact|profile|summary|confidential|@|\d|\|/i
+
+/** The candidate's name is usually one of the first lines ("CURRICULUM VITAE KASUN PERERA"). */
+function maskName(lines) {
+  for (let i = 0; i < Math.min(6, lines.length); i++) {
+    const raw = lines[i].trim()
+    const rest = raw.replace(NAME_PREFIX, '').trim()
+    const words = rest.split(/\s+/)
+    if (words.length >= 1 && words.length <= 5 && /^[A-Za-z][A-Za-z.'\- ]+$/.test(rest) && !NOT_A_NAME.test(rest) && !headerOf(rest)) {
+      lines[i] = raw.slice(0, raw.length - rest.length) + '[NAME]'
+      return lines
+    }
+  }
+  return lines
+}
+
 export function maskPII(text) {
-  const lines = text.trim().split(/\r?\n/)
-  if (lines.length && lines[0].trim().split(/\s+/).length <= 5 && !/\d/.test(lines[0])) lines[0] = '[NAME]'
+  const lines = maskName(text.trim().split(/\r?\n/))
   return lines
     .join('\n')
     .replace(EMAIL, '[EMAIL]')
@@ -71,11 +87,22 @@ export function splitSections(text) {
   return res
 }
 
-const BULLET = /^\s*(?:[-•*·▪●◦–]|\d+[.)])\s*/
+const BULLET = /^\s*(?:[-•*·▪●◦–\uf0b7\uf0a7]|\d+[.)])\s*/
+
+/** Put inline bullets on their own lines and re-join lines that wrap mid-sentence (common in PDFs). */
+export function normaliseLines(text) {
+  const out = []
+  for (const line of text.replace(/\s+[•▪●◦\uf0b7\uf0a7]\s+/g, '\n• ').split(/\r?\n/)) {
+    const t = line.trim()
+    if (out.length && /^[a-z(]/.test(t) && out[out.length - 1].trim() && !headerOf(out[out.length - 1].trim())) out[out.length - 1] += ' ' + t
+    else out.push(line)
+  }
+  return out.join('\n')
+}
 
 export function evidenceUnits(text, minWords = 3) {
   const units = []
-  for (let line of text.split(/\r?\n/)) {
+  for (let line of normaliseLines(text).split(/\r?\n/)) {
     line = line.replace(BULLET, '').trim()
     if (!line || headerOf(line)) continue
     for (const s of line.split(/(?<=[a-z0-9)])\.\s+(?=[A-Z])/)) {

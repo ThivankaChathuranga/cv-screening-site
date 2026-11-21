@@ -11,6 +11,8 @@ An interactive WebGL showcase for the [CV Screening with NLP](https://github.com
 | 05–06 Results & privacy | Animated metrics, and the masked CVs return to orbit the core "shield". |
 | CTA | A high overview shot of the whole journey. |
 
+**Demo video:** _add your LinkedIn / YouTube link here_
+
 ## Try it: the screening app inside the site
 
 The **Try it** buttons open a full-screen app that screens real CVs:
@@ -42,15 +44,16 @@ Accuracy of the JavaScript engine on the 80 labelled CV–job pairs, in keyword 
 - Respects `prefers-reduced-motion`.
 - Fonts are bundled, so no external requests.
 
-## Put it online (free, no coding)
+## Put it online with GitHub Pages (free)
 
-The ready-to-host site is in the **`dist`** folder.
+The ready-to-host site is in the **`docs`** folder.
 
-1. Edit **`dist/links.json`** with your real links (live demo, GitHub, LinkedIn).
-2. Go to **https://app.netlify.com/drop** and drag the `dist` folder onto the page.
-3. You get a live URL in seconds. Sign in to keep it and to rename it (e.g. `thivanka-cv-screening.netlify.app`).
+1. Edit **`docs/links.json`** with your real links (GitHub repository, LinkedIn, Python app), then commit and push.
+2. On GitHub, open the repository and go to **Settings → Pages**.
+3. Under **Build and deployment**, set **Source** to *Deploy from a branch*, **Branch** to `main`, and the folder to **`/docs`**. Click **Save**.
+4. After 1–2 minutes the site is live at `https://YOUR-USERNAME.github.io/cv-screening-site/`.
 
-Vercel and GitHub Pages also work. The build uses relative paths, so `dist` can be hosted from any folder. The `dist` folder is about 31 MB because it includes the WebAssembly runtime for the language model. Visitors only download that file when they use the AI model.
+The build uses relative paths, so it works from a GitHub Pages sub-path. The `docs` folder is about 31 MB because it includes the WebAssembly runtime for the language model. Visitors only download that file when they use the AI model.
 
 ## Develop locally
 
@@ -59,11 +62,11 @@ Requires [Node.js 20+](https://nodejs.org).
 ```bash
 npm install                     # .npmrc skips native install scripts (not needed in the browser)
 npm run dev                     # http://localhost:5173
-npm run build                   # outputs dist/
+npm run build                   # outputs docs/ (served by GitHub Pages)
 node scripts/evaluate.mjs       # accuracy of the JS engine on the labelled samples
 ```
 
-Links can also be changed in `public/links.json` before building. Colours live in `src/config.js` and `src/styles.css`.
+Links can also be changed in `public/links.json` before building (the build copies it to `docs/`). Colours live in `src/config.js` and `src/styles.css`.
 
 ## Structure
 

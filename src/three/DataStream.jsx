@@ -35,6 +35,7 @@ void main(){
   a = a * a;
   vec3 col = mix(uA, uB, vT) * 2.2;
   gl_FragColor = vec4(col, a * vAlpha);
+  gl_FragColor = (any(isnan(gl_FragColor)) || any(isinf(gl_FragColor))) ? vec4(0.0) : clamp(gl_FragColor, 0.0, 6.0); // additive: keep the sum of overlapping points finite
 }`
 
 export function DataStream({ count = 4000 }) {

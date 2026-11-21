@@ -17,9 +17,41 @@ export const SKILL_TAXONOMY = {
   etl: ['etl', 'data pipelines?', 'airflow', 'data warehouse', 'data warehousing'],
   erp: ['erp', 'sap', 'oracle ebs', 'dynamics 365'],
   forecasting: ['forecasting', 'forecasts?', 'time series'],
-  git: ['git', 'github', 'gitlab'],
+  git: ['git', 'github', 'gitlab', 'version control'],
+  // Software engineering
+  javascript: ['javascript', 'typescript', '\\bjs\\b'],
+  java: ['java'],
+  'web frameworks': ['react', 'angular', 'vue', 'node\\.?js', 'express', 'django', 'flask', 'spring boot', '\\.net'],
+  'rest api': ['rest(ful)? apis?', 'apis?', 'api endpoints?', 'web services?'],
+  databases: ['relational databases?', 'database design', 'database management', 'mongodb', 'nosql'],
+  'software testing': ['unit tests?', 'unit testing', 'test automation', 'automated tests?', 'jest', 'pytest', 'junit'],
+  'code review': ['code reviews?'],
+  agile: ['agile', 'scrum', 'jira'],
+  'object-oriented programming': ['object[- ]oriented', '\\boop\\b'],
+  debugging: ['debugging', 'troubleshoot\\w*', 'software defects?', 'bug fix\\w*', 'investigated defects'],
+  'html/css': ['html5?', 'css3?'],
+  // Digital marketing
+  'social media': ['social media', 'instagram', 'facebook', 'tiktok', 'content calendars?'],
+  seo: ['seo', 'search engine optimi[sz]ation'],
+  'paid advertising': ['paid ads?', 'paid advertising', 'google ads', 'meta ads', 'facebook ads', 'ppc', 'sem', 'ad campaigns?', 'boosted posts?'],
+  'email marketing': ['email marketing', 'mailchimp', 'newsletters?'],
+  'content creation': ['content creation', 'content planning', 'copywriting', 'content writing', 'creative assets?', 'brand storytelling'],
+  'marketing analytics': ['google analytics', 'ga4', 'marketing analytics', 'campaign (performance|reporting|analytics)', 'conversions?', 'click[- ]through'],
+  'design tools': ['canva', 'photoshop', 'illustrator', 'figma', 'adobe'],
+  'digital marketing': ['digital marketing', 'online marketing'],
+  // Finance & accounting
+  'accounts payable/receivable': ['accounts payable', 'accounts receivable'],
+  reconciliation: ['reconciliations?', 'bank rec\\w*', 'ledger rec\\w*'],
+  bookkeeping: ['bookkeeping', 'book-keeping', 'general ledger', 'journal entries', 'ledgers?'],
+  'invoice processing': ['invoices?', 'invoicing'],
+  'accounting software': ['quickbooks', 'sage', 'xero', 'tally', 'accounting software'],
+  'financial reporting': ['financial reports?', 'financial reporting', 'financial statements?', 'month[- ]end', 'management accounts'],
+  'accounting qualification': ['aat', 'cima', 'acca', 'chartered accountant'],
+  tax: ['vat', 'paye', 'taxation', 'tax returns?'],
   // HR
-  recruitment: ['recruitment', 'recruiting', 'recruiter', 'talent acquisition', 'hiring', 'sourcing candidates', 'headhunting', 'interviewing candidates'],
+  recruitment: ['recruitment', 'recruiting', 'recruiter', 'talent acquisition', 'hiring', 'sourcing candidates', 'headhunting', 'interviewing candidates', 'interview scheduling', 'arranged interviews', 'cv screening', 'candidate screening', 'job advertisements?'],
+  'hr administration': ['hr administration', 'employee records', 'employee files', 'personnel (files|records|reports)', 'hr databases?', 'employee documentation', 'employment documentation', 'filing systems?', 'attendance (and leave )?(records|reports|administration)', 'leave administration', 'employment letters'],
+  'microsoft office': ['microsoft office', 'ms office', 'microsoft word', 'ms word', 'outlook', 'powerpoint'],
   'labour law': ['labou?r laws?', 'employment law', 'shop and office', 'wages board', 'industrial disputes act', 'epf', 'etf', 'gratuity', 'statutory compliance'],
   payroll: ['payroll', 'salary processing', 'salary administration', 'salary inputs?'],
   onboarding: ['onboarding', 'induction', 'orientation programmes?'],
@@ -44,9 +76,12 @@ export const SKILL_TAXONOMY = {
   communication: ['communication', 'presentation skills', 'stakeholder'],
   leadership: ['leadership', 'team lead', 'led a team', 'supervis\\w*'],
   'problem solving': ['problem solving', 'problem-solving', 'analytical'],
+  'attention to detail': ['attention to detail', 'detail[- ]oriented', 'accurate', 'accuracy'],
+  'time management': ['time management', 'organised', 'organized'],
+  teamwork: ['team ?work', 'collaborat\\w*', 'team player'],
 }
 
-export const SOFT_SKILLS = new Set(['communication', 'leadership', 'problem solving'])
+export const SOFT_SKILLS = new Set(['communication', 'leadership', 'problem solving', 'attention to detail', 'time management', 'teamwork'])
 export const EVIDENCE_WEIGHT = { experience: 1, projects: 1, summary: 0.9, header: 0.9, education: 1, skills: 0.5 }
 
 const escapeRe = (s) => s.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')

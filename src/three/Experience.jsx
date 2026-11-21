@@ -1,6 +1,8 @@
 import { useRef, useState } from 'react'
+import * as THREE from 'three'
 import { useFrame, useThree } from '@react-three/fiber'
-import { ContactShadows, Environment, Lightformer, PerformanceMonitor, Sparkles } from '@react-three/drei'
+import { ContactShadows, Environment, Lightformer, PerformanceMonitor } from '@react-three/drei'
+import { Dust } from './Dust'
 import { Bloom, EffectComposer, Noise, ToneMapping, Vignette } from '@react-three/postprocessing'
 import { ToneMappingMode } from 'postprocessing'
 import { CameraRig } from './CameraRig'
@@ -32,6 +34,18 @@ function HeroStage({ high }) {
   )
 }
 
+// Guard every built-in material: a single NaN/Infinity pixel would otherwise be
+// spread over the whole screen by the bloom pass and turn the frame black.
+// Also cap HDR brightness: values above the half-float limit (65504) become Infinity in the
+// bloom buffers and then NaN. 64 is far above anything the bloom threshold needs.
+const NAN_GUARD = '\ngl_FragColor = (any(isnan(gl_FragColor)) || any(isinf(gl_FragColor))) ? vec4(0.0, 0.0, 0.0, 1.0) : clamp(gl_FragColor, 0.0, 64.0);'
+if (!THREE.ShaderChunk.dithering_fragment.includes('isnan')) THREE.ShaderChunk.dithering_fragment += NAN_GUARD
+
+// ?record keeps full quality for frame-by-frame video capture
+const PARAMS = typeof location !== 'undefined' ? new URLSearchParams(location.search) : new URLSearchParams()
+const RECORD = PARAMS.has('record')
+const FX = PARAMS.get('fx') // debug: comma list of effects to keep
+
 export function Experience({ onReady }) {
   const [high, setHigh] = useState(!state.isMobile)
   const { gl } = useThree()
@@ -44,7 +58,7 @@ export function Experience({ onReady }) {
 
   return (
     <>
-      <PerformanceMonitor
+      {!RECORD && <PerformanceMonitor
         onDecline={() => {
           setHigh(false)
           state.quality = 'low'
@@ -58,7 +72,7 @@ export function Experience({ onReady }) {
           }
         }}
         flipflops={3}
-      />
+      />}
 
       <color attach="background" args={[COLORS.bg]} />
       <fog attach="fog" args={[COLORS.bg, 16, 48]} />
@@ -79,14 +93,16 @@ export function Experience({ onReady }) {
       <RankingTowers highQuality={high} />
 
       {/* Floating dust across the whole journey */}
-      <Sparkles count={high ? 260 : 100} scale={[30, 14, 60]} position={[0, 1, -16]} size={2.2} speed={0.25} opacity={0.5} color={COLORS.cyan} />
+      <Dust count={high ? 260 : 100} color={COLORS.cyan} />
 
-      <EffectComposer multisampling={0} enableNormalPass={false}>
-        <Bloom mipmapBlur intensity={high ? 0.85 : 0.6} luminanceThreshold={0.82} luminanceSmoothing={0.2} radius={0.75} />
-        <Vignette offset={0.25} darkness={0.75} />
-        <Noise opacity={0.035} premultiply />
-        <ToneMapping mode={ToneMappingMode.ACES_FILMIC} />
-      </EffectComposer>
+      {FX !== 'off' && (
+        <EffectComposer multisampling={0} enableNormalPass={false} frameBufferType={PARAMS.get('fb') === 'float' ? THREE.FloatType : THREE.HalfFloatType}>
+          {(!FX || FX.includes('bloom')) && <Bloom mipmapBlur={!PARAMS.has('nomip')} intensity={high ? 0.85 : 0.6} luminanceThreshold={0.82} luminanceSmoothing={0.2} radius={0.75} />}
+          {(!FX || FX.includes('vignette')) && <Vignette offset={0.25} darkness={0.75} />}
+          {(!FX || FX.includes('noise')) && <Noise opacity={0.035} premultiply />}
+          <ToneMapping mode={ToneMappingMode.ACES_FILMIC} />
+        </EffectComposer>
+      )}
     </>
   )
 }

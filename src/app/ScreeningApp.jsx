@@ -163,6 +163,7 @@ export function ScreeningApp({ open, onClose }) {
         useModel,
       })
       res.rows.forEach((r, i) => (r.code = `C${String(i + 1).padStart(2, '0')}`))
+      res.title = title // the header shows the title that was screened, not later edits
       setResult(res)
       root.current?.querySelector('.app__results')?.scrollTo({ top: 0, behavior: 'smooth' })
     } catch (e) {
@@ -180,7 +181,7 @@ export function ScreeningApp({ open, onClose }) {
     const blob = new Blob([[head.join(','), ...lines].join('\n')], { type: 'text/csv' })
     const a = document.createElement('a')
     a.href = URL.createObjectURL(blob)
-    a.download = `cv-ranking-${(title || 'position').replace(/\W+/g, '-').toLowerCase()}.csv`
+    a.download = `cv-ranking-${(result.title || 'position').replace(/\W+/g, '-').toLowerCase()}.csv`
     a.click()
     URL.revokeObjectURL(a.href)
   }
@@ -354,7 +355,7 @@ export function ScreeningApp({ open, onClose }) {
               <div className="res-head">
                 <div>
                   <div className="eyebrow">Results</div>
-                  <h2>{title || result.job.title || 'Position'}</h2>
+                  <h2>{result.title || result.job.title || 'Position'}</h2>
                   <div className="muted small">Model: {result.model}</div>
                 </div>
                 <button className="mini" onClick={exportCsv}>⬇ Export CSV</button>

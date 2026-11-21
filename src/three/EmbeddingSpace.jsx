@@ -38,6 +38,7 @@ void main(){
   float core = smoothstep(0.5, 0.0, d);
   float a = core * core;
   gl_FragColor = vec4(vColor * (1.4 + core * 1.6), a * vAlpha);
+  gl_FragColor = (any(isnan(gl_FragColor)) || any(isinf(gl_FragColor))) ? vec4(0.0) : clamp(gl_FragColor, 0.0, 6.0); // additive: keep the sum of overlapping points finite
 }`
 
 function gauss() {

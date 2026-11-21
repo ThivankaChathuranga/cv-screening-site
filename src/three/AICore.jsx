@@ -25,12 +25,14 @@ const coreFragment = /* glsl */ `
 uniform float uTime; uniform float uPulse; uniform vec3 uA; uniform vec3 uB; uniform vec3 uC;
 varying vec3 vNormal; varying vec3 vPos; varying float vNoise;
 void main(){
-  float fres = pow(1.0 - abs(dot(normalize(vNormal), vec3(0.0,0.0,1.0))), 2.2);
+  // clamp: float error can push the base below 0, and pow() of a negative number is NaN
+  float fres = pow(clamp(1.0 - abs(dot(normalize(vNormal), vec3(0.0,0.0,1.0))), 0.0, 1.0), 2.2);
   float bands = 0.5 + 0.5 * sin(vNoise * 7.0 + uTime * 1.4);
   vec3 col = mix(uA, uB, bands);
   col = mix(col, uC, smoothstep(0.35, 1.0, vNoise));
   float glow = 1.4 + fres * 2.8 + uPulse * 3.0;
   gl_FragColor = vec4(col * glow, 1.0);
+  gl_FragColor = (any(isnan(gl_FragColor)) || any(isinf(gl_FragColor))) ? vec4(0.0) : clamp(gl_FragColor, 0.0, 16.0);
 }`
 
 function Ring({ radius, tube, color, speed, tilt, dots = 3 }) {
